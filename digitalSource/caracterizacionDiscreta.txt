@@ -1,0 +1,97 @@
+Vamos a elegir como caracterizacion el escribir un texto muy rapido con el teclado de la computadora;
+asi por ejemplo,
+
+"ndbeqfjnwekncjkrweklcvnkwermvcklrwe vljer fvjkr ev   fdpejkinjnekefknekfkevlmqwmd	pnf fnfk4nfje4fj ejkf je fmw fejhbjkfd 3jf c dkop3kno3kpdmmldmlmlmnobjkewwndjiebfwbfbejknf"
+
+
+1. Luego, dado al texto anteriormente digitado de forma aleatoria, entonces los simbolos posibles en el alfabeto de esta fuente de informacion, son:
+
+['n', 'd', 'b', 'e', 'q', 'f', 'j', 'n', 'k', 'w', 'c', 'r', 'l', 'v', ' ', 'm', 'p', '4', '3', 'o', 'i',]
+
+2. La estimacion de la tasa de salida de simbolos entonces se dispone entonces como el numero de caracteres contemplados en la frase aleatoria. Empleando el lenguaje de programacion Python podemos conocer dicho numero de caracteres tal como siguie:
+
+'''
+#!/usr/bin/python3
+import numpy as np
+import matplotlib.pyployt as plt
+
+#def your variable:
+string = "ndbeqfjnwekncjkrweklcvnkwermvcklrwe vljer fvjkr ev   fdpejkinjnekefknekfkevlmqwmd	pnf fnfk4nfje4fj ejkf je fmw fejhbjkfd 3jf c dkop3kno3kpdmmldmlmlmnobjkewwndjiebfwbfbejknf"
+
+print(len(string))
+
+'''
+
+El resultado son 172 caractereres alfa numericos
+
+
+3. Para estimar la distribucion de la probabilidad de aparicion de los simbolos posibles, entonces podemos aprovechar el script de python anterior para hacer:
+
+'''
+#carpinteria
+chars = ['n', 'd', 'b', 'e', 'q', 'f', 'j', 
+			'n', 'k', 'w', 'c', 'r', 'l', 'v', 
+				' ', 'm', 'p', '4', '3', 'o', 'i',]			
+numChar = np.arange(0, len(chars), 1)
+charDictionary = dict(zip(numChar, chars))
+stringSize = np.arange(0, len(string), 1)
+
+#valorando frecuencia de aparicion de simbolos
+charCounts = []
+for i in numChar:
+	k = string.count(charDictionary[i])
+	charCounts.append(k)
+
+print(dict(zip(chars, charCounts)))
+charCounts = np.array(charCounts)*(100/184)
+
+#plotting
+plt.figure()
+for i in numChar:
+	plt.bar([i], [charCounts[i]])
+
+plt.xticks(numChar, chars)
+plt.xlabel('Simbolos')
+plt.ylabel('frecuencia de aparicion [%]')
+plt.title('Ocurrencia de simbolos para un texto digitado rapidamente')
+plt.show()
+
+'''
+
+Luego, el numero de aciertos por simbolo distinto se muestra aca:
+{	'n': 14, 
+	'd': 8, 
+	'b': 6, 
+	'e': 19, 
+	'q': 2, 
+	'f': 18, 
+	'j': 16, 
+	'k': 19, 
+	'w': 9, 
+	'c': 4, 
+	'r': 5, 
+	'l': 7, 
+	'v': 6, 
+	' ': 14, 
+	'm': 9, 
+	'p': 4, 
+	'4': 2, 
+	'3': 3, 
+	'o': 3, 
+	'i': 2		}
+
+
+La probabilidad de ocurrencia distribuida se muestra mediante la gradica adjunta.
+
+
+
+
+
+
+
+
+
+
+
+
+
